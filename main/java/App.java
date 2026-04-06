@@ -7,15 +7,23 @@ public class App {
 
     public static void main(String[] args) {
 
-        // ❌ BAD CODE (add this line)
-        String apiKey = "123456"; // hardcoded → vulnerability
+        // ✅ FIX: Read API key from environment variable (no hardcoding)
+        String apiKey = System.getenv("API_KEY");
 
         try {
-            int x = 10 / 2;
-            System.out.println(String.format("Result: %d", x));
+            int denominator = 2;
 
+            if (denominator != 0) {
+                int result = 10 / denominator;
+                System.out.println(String.format("Result: %d", result));
+            } else {
+                System.out.println("Denominator cannot be zero.");
+            }
+
+        } catch (ArithmeticException e) {
+            System.out.println(String.format("Arithmetic error: %s", e.getMessage()));
         } catch (Exception e) {
-            System.out.println(String.format("Error occurred: %s", e.getMessage()));
+            System.out.println(String.format("Unexpected error: %s", e.getMessage()));
         }
 
         System.out.println(MESSAGE);
