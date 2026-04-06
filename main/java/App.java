@@ -7,6 +7,9 @@ public class App {
 
     public static void main(String[] args) {
 
+        // ❌ BAD CODE (add this line)
+        String apiKey = "123456"; // hardcoded → vulnerability
+
         try {
             int x = 10 / 2;
             System.out.println(String.format("Result: %d", x));
