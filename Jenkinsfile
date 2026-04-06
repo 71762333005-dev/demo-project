@@ -22,5 +22,19 @@ pipeline {
                 }
             }
         }
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    // Wait for SonarQube analysis result
+                    def qg = waitForQualityGate()
+
+                    // Fail pipeline if Quality Gate fails
+                    if (qg.status != 'OK') {
+                        error "Pipeline failed due to Quality Gate: ${qg.status}"
+                    }
+                }
+            }
+        }
     }
 }
